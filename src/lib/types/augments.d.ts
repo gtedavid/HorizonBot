@@ -31,6 +31,7 @@ declare module '@sapphire/framework' {
 
   interface ArgType {
     code: string;
+    hour: HourMinutes;
     codeLanguage: CodeLanguageResult;
     command: MonkaCommand;
     day: Date;
