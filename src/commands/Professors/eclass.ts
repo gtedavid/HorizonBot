@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 import type { GuildMember, Role } from 'discord.js';
 import { MessageEmbed } from 'discord.js';
 import pupa from 'pupa';
-
 import { eclass as config } from '@/config/commands/professors';
 import messages from '@/config/messages';
 import settings from '@/config/settings';
