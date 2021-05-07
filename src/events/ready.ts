@@ -42,6 +42,20 @@ export default class ReadyEvent extends Event {
         });
     }
 
+    this.context.logger.info('[Reaction Roles] Caching eclass annoucement...');
+    const eclassAnnoucement = await Eclass.find();
+    for (const announcement of eclassAnnoucement) {
+      const channel = await this.context.client.configManager.get(announcement.guild, ConfigEntries.ClassAnnoucement);
+
+      channel.messages.fetch(announcement.announcementMessage)
+        .catch(async () => {
+          // If we failed to fetch the message, it is likely that it has been deleted, so we remove it too.
+          await ReactionRole.findByIdAndDelete(announcement._id);
+          this.context.client.reactionRolesIds = this.context.client.reactionRolesIds
+            .filter(elt => elt !== announcement.announcementMessage);
+        });
+    }
+
     this.context.logger.info('[Anti Swear] Caching alert messages...');
     let flaggedMessages = await FlaggedMessageDB.find({ approved: false });
     for (const flaggedMessage of flaggedMessages) {

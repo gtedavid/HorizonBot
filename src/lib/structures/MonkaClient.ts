@@ -132,4 +132,13 @@ export default class MonkaClient extends SapphireClient {
         .filter(Boolean));
     }
   }
+
+  private async _loadEclassRoles(): Promise<void> {
+    const eclassRoles = await Eclass.find().catch(nullop);
+    if (eclassRoles) {
+      this.eclassRolesIds.push(
+        ...eclassRoles.map(document => document?.announcementMessage).filter(Boolean),
+      );
+    }
+  }
 }
