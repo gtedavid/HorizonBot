@@ -38,6 +38,7 @@ import { generateSubcommands, nullop, ValidateEclassArgument } from '@/utils';
     context: { role: settings.roles.eprof, message: config.messages.onlyProfessor },
   }],
 })
+
 export default class EclassCommand extends MonkaSubCommand {
   public async create(message: GuildMessage, args: Args): Promise<void> {
     const classChannel = await args.pickResult('guildTextBasedChannel');
